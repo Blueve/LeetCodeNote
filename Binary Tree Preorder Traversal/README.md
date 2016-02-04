@@ -1,4 +1,4 @@
-Binary Tree Inorder Traversal
+Binary Tree Preorder Traversal
 ==========
 
 ## C++
@@ -17,22 +17,21 @@ Binary Tree Inorder Traversal
    */
   class Solution {
   public:
-      vector<int> inorderTraversal(TreeNode* root) {
+      vector<int> preorderTraversal(TreeNode* root) {
           vector<int> result;
-          _inorderTraversal(root, result);
+          _preorderTraversal(root, result);
           return result;
       }
       
-      void _inorderTraversal(TreeNode* root, vector<int>& result)
+      void _preorderTraversal(TreeNode* root, vector<int>& result)
       {
           if(!root) return;
-          _inorderTraversal(root->left, result);
           result.push_back(root->val);
-          _inorderTraversal(root->right, result);
+          _preorderTraversal(root->left, result);
+          _preorderTraversal(root->right, result);
       }
   };
   ```
-
   Iteratively
   ```cpp
   /**
@@ -46,25 +45,22 @@ Binary Tree Inorder Traversal
    */
   class Solution {
   public:
-      vector<int> inorderTraversal(TreeNode* root) {
+      vector<int> preorderTraversal(TreeNode* root) {
           vector<int> result;
+          if(!root) return result;
           
           stack<TreeNode*> dfs;
-          TreeNode* node = root;
-          while(!dfs.empty() || node)
+          TreeNode* node;
+          dfs.push(root);
+          while(!dfs.empty())
           {
-              if(node)
-              {
-                  dfs.push(node);
-                  node = node->left;
-              }
-              else
-              {
-                  node = dfs.top();
-                  dfs.pop();
-                  result.push_back(node->val);
-                  node = node->right;
-              }
+              node = dfs.top();
+              dfs.pop();
+              
+              result.push_back(node->val);
+              
+              if(node->right) dfs.push(node->right);
+              if(node->left) dfs.push(node->left);
           }
           return result;
       }
