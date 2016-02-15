@@ -24,7 +24,7 @@ Delete Node in a Linked List
       }
   };
   ```
-
+  More general
   ```cpp
   /**
    * Definition for singly-linked list.

@@ -19,9 +19,7 @@ Invert Binary Tree
   public:
       TreeNode* invertTree(TreeNode* root) {
           if(!root) return NULL;
-          auto tmp = root->left;
-          root->left = root->right;
-          root->right = tmp;
+          swap(root->left, root->right);
           invertTree(root->left);
           invertTree(root->right);
           return root;
