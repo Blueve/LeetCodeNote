@@ -29,7 +29,7 @@ Unique Paths
       
   public:
       int uniquePaths(int m, int n) {
-          if(m > n) uniquePaths(n, m);
+          if(m > n) return uniquePaths(n, m);
           vector<int> grid(m, 1);
           for(int i(1); i < n; ++i)
           {
