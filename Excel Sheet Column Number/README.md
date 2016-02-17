@@ -9,11 +9,11 @@ Excel Sheet Column Number
   class Solution {
   public:
       int titleToNumber(string s) {
-          int result(0), len(s.size());
-          for(int i(0); i < len; ++i)
+          int result(0);
+          for(auto c : s)
           {
               result *= 26;
-              result += s[i] - 'A' + 1;
+              result += c - 'A' + 1;
           }
           return result;
       }
