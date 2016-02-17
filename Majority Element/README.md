@@ -27,12 +27,12 @@ Majority Element
   class Solution {
   public:
       int majorityElement(vector<int>& nums) {
-          int m(nums[0]), count(0);
+          int m(nums[0]), count(1);
           for(auto num : nums)
           {
-              if     (num == m)          ++count;
-              else if(num != m && count) --count;
-              else
+              if     (num == m) ++count;
+              else if(num != m) --count;
+              else if(!count)
               {
                   m = num;
                   count = 1;
