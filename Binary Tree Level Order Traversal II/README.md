@@ -7,7 +7,7 @@ Binary Tree Level Order Traversal II
 
   ```cpp
   /**
-   * Definition for binary tree
+   * Definition for a binary tree node.
    * struct TreeNode {
    *     int val;
    *     TreeNode *left;
@@ -17,57 +17,62 @@ Binary Tree Level Order Traversal II
    */
   class Solution {
   public:
-      vector<vector<int> > levelOrderBottom(TreeNode *root) {
-          stack<vector<int>> result;
-          vector<vector<int>> ret;
+      vector<vector<int>> levelOrderBottom(TreeNode* root) {
+          vector<vector<int>> result;
+          vector<int> level;
+          if(!root) return result;
           
-          vector<int> line;
-          if(root == NULL) return ret;
-          
-          queue<TreeNode *> bfs;
-          queue<int>        depth;
-          bfs.push(root);
-          depth.push(0);
-          
+          queue<TreeNode*> bfs;
           TreeNode* node;
-          int d;
-          int pre(0);
+          
+          bfs.push(root);
           while(!bfs.empty())
           {
-              node = bfs.front();
-              bfs.pop();
-              
-              d = depth.front();
-              depth.pop();
-              
-              if(d != pre)
+              int N(bfs.size());
+              level.clear();
+              for(int i(0); i < N; ++i)
               {
-                  result.push(line);
-                  line.clear();
+                  node = bfs.front();
+                  bfs.pop();
+                  
+                  level.push_back(node->val);
+                  
+                  if(node->left) bfs.push(node->left);
+                  if(node->right) bfs.push(node->right);
               }
-              line.push_back(node->val);
-              pre = d;
-              
-              if(node->left != NULL)
-              {
-                  bfs.push(node->left);
-                  depth.push(d + 1);
-              }
-              if(node->right != NULL)
-              {
-                  bfs.push(node->right);
-                  depth.push(d + 1);
-              }
+              result.push_back(level);
           }
-          result.push(line);
-          
-          
-          while(!result.empty())
-          {
-              ret.push_back(result.top());
-              result.pop();
-          }
-          return ret;
+          reverse(result.begin(), result.end());
+          return result;
+      }
+  };
+  ```
+  Whitout reverse, but slower cause insert in front of vector
+  ```cpp
+  /**
+   * Definition for a binary tree node.
+   * struct TreeNode {
+   *     int val;
+   *     TreeNode *left;
+   *     TreeNode *right;
+   *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+   * };
+   */
+  class Solution {
+  public:
+      vector<vector<int>> levelOrderBottom(TreeNode* root) {
+          vector<vector<int>> result;
+          _levelOrderBottom(root, 1, result);
+          return result;
+      }
+      
+      void _levelOrderBottom(TreeNode* root, int depth, vector<vector<int>>& result)
+      {
+          if(!root) return;
+          if(depth > result.size()) result.insert(result.begin(), vector<int>());
+          if(root->left) _levelOrderBottom(root->left, depth + 1, result);
+          if(root->right) _levelOrderBottom(root->right, depth + 1, result);
+          result[result.size() - depth].push_back(root->val);
       }
   };
   ```
