@@ -7,37 +7,23 @@ Add Binary
 
   ```cpp
   class Solution {
-	public:
+  public:
       string addBinary(string a, string b) {
-          int lenA(a.size());
-          int lenB(b.size());
-          int len(lenB), d(abs(lenA - lenB));
           
-          if(lenB > lenA)
+          if(b.size() > a.size()) swap(a, b);
+          int la(a.size()), lb(b.size());
+          
+          for(int i(la - 1); i >= 0; --i)
           {
-              string tmp(a);
-              a = b; b = tmp;
-          }
-          
-          
-          for(int i(a.size() - 1); i >= 0; i--)
-          {
-              if(i - d >= 0)
-                  a[i] += b[i - d] - '0';
-              if(a[i] == '2')
+              if(i - (la - lb) >= 0)
+                  a[i] += b[i - (la - lb)] - '0';
+              if(a[i] > '1')
               {
-                  a[i]      = '0';
-                  if(i == 0) a = "1" + a;
-                  else       a[i - 1] +=  1 ; 
-              }
-              else if(a[i] == '3')
-              {
-                  a[i]      = '1';
-                  if(i == 0) a = "1" + a;
-                  else       a[i - 1] +=  1 ; 
+                  a[i] = a[i] - 2;
+                  if(i == 0) a = '1' + a;
+                  else a[i - 1] += 1;
               }
           }
-          
           return a;
       }
   };
