@@ -7,7 +7,7 @@ Binary Tree Level Order Traversal
 
   ```cpp
   /**
-   * Definition for binary tree
+   * Definition for a binary tree node.
    * struct TreeNode {
    *     int val;
    *     TreeNode *left;
@@ -17,47 +17,31 @@ Binary Tree Level Order Traversal
    */
   class Solution {
   public:
-      vector<vector<int> > levelOrder(TreeNode *root) {
+      vector<vector<int>> levelOrder(TreeNode* root) {
           vector<vector<int>> result;
-          vector<int> line;
+          vector<int> level;
           if(root == NULL) return result;
           
-          queue<TreeNode *> bfs;
-          queue<int>        depth;
-          bfs.push(root);
-          depth.push(0);
-          
+          queue<TreeNode*> bfs;
           TreeNode* node;
-          int d;
-          int pre(0);
+          
+          bfs.push(root);
           while(!bfs.empty())
           {
-              node = bfs.front();
-              bfs.pop();
-              
-              d = depth.front();
-              depth.pop();
-              
-              if(d != pre)
+              int N(bfs.size());
+              level.clear();
+              for(int i(0); i < N; ++i)
               {
-                  result.push_back(line);
-                  line.clear();
+                  node = bfs.front();
+                  bfs.pop();
+                  
+                  level.push_back(node->val);
+                  
+                  if(node->left) bfs.push(node->left);
+                  if(node->right) bfs.push(node->right);
               }
-              line.push_back(node->val);
-              pre = d;
-              
-              if(node->left != NULL)
-              {
-                  bfs.push(node->left);
-                  depth.push(d + 1);
-              }
-              if(node->right != NULL)
-              {
-                  bfs.push(node->right);
-                  depth.push(d + 1);
-              }
+              result.push_back(level);
           }
-          result.push_back(line);
           return result;
       }
   };
