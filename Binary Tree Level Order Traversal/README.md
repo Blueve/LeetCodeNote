@@ -20,7 +20,7 @@ Binary Tree Level Order Traversal
       vector<vector<int>> levelOrder(TreeNode* root) {
           vector<vector<int>> result;
           vector<int> level;
-          if(root == NULL) return result;
+          if(!root) return result;
           
           queue<TreeNode*> bfs;
           TreeNode* node;
