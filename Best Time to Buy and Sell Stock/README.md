@@ -47,3 +47,20 @@ Best Time to Buy and Sell Stock
       }
   };
   ```
+  Better
+  ```cpp
+  class Solution {
+  public:
+      int maxProfit(vector<int>& prices) {
+          // partial max profit = cur - curMin;
+          // max profit = max(partial max frofit, max profit)
+          int minPrice(INT_MAX), maxProfit(0);
+          for(auto p : prices)
+          {
+              minPrice = min(p, minPrice);
+              maxProfit = max(p - minPrice, maxProfit);
+          }
+          return maxProfit;
+      }
+  };
+  ```
