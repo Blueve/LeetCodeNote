@@ -4,7 +4,8 @@ Factorial Trailing Zeroes
 ## C++
 
   - Answer
-  Every factor which suffix is '5' lead to a zero.
+  Every factor which suffix is 5 lead to a zero
+
   ```cpp
   class Solution {
   public:
@@ -15,6 +16,15 @@ Factorial Trailing Zeroes
               result += n / i;
           }
           return result;
+      }
+  };
+  ```
+
+  ```cpp
+  class Solution {
+  public:
+      int trailingZeroes(int n) {
+          return n == 0 ? 0 : n / 5 + trailingZeroes(n / 5);
       }
   };
   ```
