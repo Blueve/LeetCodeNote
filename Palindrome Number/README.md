@@ -9,17 +9,18 @@ Palindrome Number
   class Solution {
   public:
       bool isPalindrome(int x) {
-          if(x < 0) return false;
+          // 10\100\... should return false
+          if(x < 0 || (x % 10 == 0) && (x != 0)) return false;
           
-          long long flip(0);
-          int number(x);
-          while(number)
+          int flip(0);
+          while(x > flip)
           {
               flip *= 10;
-              flip += number % 10;
-              number /= 10;
+              flip += x % 10;
+              x /= 10;
           }
-          return flip == x;
+          // Even / Odd
+          return flip == x || flip / 10 == x;
       }
   };
   ```
