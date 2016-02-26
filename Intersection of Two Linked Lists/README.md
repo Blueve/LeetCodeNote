@@ -1,4 +1,4 @@
-Single Number
+Intersection of Two Linked Lists
 ==========
 
 ## C++
