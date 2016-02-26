@@ -59,3 +59,24 @@ Valid Sudoku
       }
   };
   ```
+  Better, one pass, using bit to present 1-9's arrangement
+  ```cpp
+  class Solution {
+  public:
+      bool isValidSudoku(vector<vector<char>>& board) {
+          short row[9] = {0}, col[9] = {0}, block[3][3] = {0};
+          for(int i(0); i < 9; i++)
+          {
+              for(int j(0); j < 9; j++)
+              {
+                  short b = 1 << board[i][j] - '0';
+                  if(row[i] & b || col[j] & b || block[i/3][j/3] & b) return false;
+                  row[i] |= b;
+                  col[j] |= b;
+                  block[i/3][j/3] |= b;
+              }
+          }
+          return true;
+      }
+  };
+  ```
