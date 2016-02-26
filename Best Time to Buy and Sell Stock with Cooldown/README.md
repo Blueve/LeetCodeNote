@@ -41,3 +41,20 @@ Best Time to Buy and Sell Stock with Cooldown
       }
   };
   ```
+  Consider sell and cd but buy
+  ```cpp
+  class Solution {
+  public:
+      int maxProfit(vector<int>& prices) {
+          int N(prices.size());
+          int pre(0), sellP(0), coolP(0);
+          for(int i(1); i < N; i++)
+          {
+              pre = sellP;
+              sellP = max(sellP + prices[i] - prices[i - 1], coolP);
+              coolP = max(pre, coolP);
+          }
+          return max(sellP, coolP);
+      }
+  };
+  ```
