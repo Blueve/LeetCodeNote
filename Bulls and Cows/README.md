@@ -68,3 +68,25 @@ Bulls and Cows
       }
   };
   ```
+  Shorter and reduce memory used
+  ```cpp
+  class Solution {
+  public:
+      string getHint(string secret, string guess) {
+          int length(secret.length()),sumA(0), sumB(0);
+          int countS[10] = {0}, countG[10] = {0};
+          for(int i(0); i < length; i++)
+          {
+              
+              if(secret[i] == guess[i]) sumA++;
+              else
+              {
+                  int s(secret[i] - '0'), g(guess[i] - '0');
+                  (countS[g] > 0) ? countS[g]--, sumB++ : countG[g]++;
+                  (countG[s] > 0) ? countG[s]--, sumB++ : countS[s]++;
+              }
+          }
+          return to_string(sumA) + 'A' + to_string(sumB) + 'B';
+      }
+  };
+  ```
