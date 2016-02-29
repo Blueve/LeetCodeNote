@@ -5,9 +5,10 @@ Find Minimum in Rotated Sorted Array
 
   - Answer
   Consider 3 situation:
-    low mid highest lowest high
-    low highest lowest mid high
-    lowest mid highest
+  low mid highest lowest high
+  low highest lowest mid high
+  lowest mid highest
+
   ```cpp
   class Solution {
   public:
@@ -16,12 +17,8 @@ Find Minimum in Rotated Sorted Array
           while(l < r)
           {
               m = l + ((r - l) >> 1);
-              if(nums[m] < nums[l])
-                  r = m;
-              else if(nums[m] > nums[r])
-                  l = m + 1;
-              else
-                  return nums[l];
+              if(nums[m] < nums[l]) r = m;
+              else                  l = m + 1;
           }
           return nums[l];
       }
