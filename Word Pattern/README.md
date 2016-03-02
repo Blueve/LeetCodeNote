@@ -31,3 +31,24 @@ Word Pattern
       }
   };
   ```
+  Using istringstream
+  ```cpp
+  class Solution {
+  public:
+      bool wordPattern(string pattern, string str) {
+          unordered_map<char, int> m1;
+          unordered_map<string, int> m2;
+          
+          istringstream is(str);
+          string s;
+          int i(0);
+          for(; is >> s; i++)
+          {
+              char c = pattern[i];
+              if(m1[c] != m2[s]) return false;
+              else m1[c] = m2[s] = i + 1;
+          }
+          return i == pattern.length();
+      }
+  };
+  ```

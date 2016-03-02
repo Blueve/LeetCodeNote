@@ -4,7 +4,7 @@ Longest Common Prefix
 ## C++
 
   - Answer
-
+  Count prefix positional
   ```cpp
   class Solution {
   public:
@@ -23,6 +23,29 @@ Longest Common Prefix
               }
           }
           return strs[0];
+      }
+  };
+  ```
+  Reduce prefix one by one
+  ```cpp
+  class Solution {
+  public:
+      string longestCommonPrefix(vector<string>& strs) {
+          int N(strs.size());
+          if(!N) return "";
+          
+          int prefix(strs[0].length()), j, strLen;
+          
+          for(int i(1); i < N; i++)
+          {
+              strLen = strs[i].length();
+              for(j = 0; j < strLen && j < prefix; j++)
+              {
+                  if(strs[i][j] != strs[0][j]) break;
+              }
+              prefix = j;
+          }
+          return strs[0].substr(0,prefix);
       }
   };
   ```
