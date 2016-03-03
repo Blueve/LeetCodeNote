@@ -11,12 +11,12 @@ Add Binary
       string addBinary(string a, string b) {
           
           if(b.size() > a.size()) swap(a, b);
-          int la(a.size()), lb(b.size());
+          int la(a.size()), lb(b.size()), d(la - lb);
           
           for(int i(la - 1); i >= 0; --i)
           {
-              if(i - (la - lb) >= 0)
-                  a[i] += b[i - (la - lb)] - '0';
+              if(i - d >= 0)
+                  a[i] += b[i - d] - '0';
               if(a[i] > '1')
               {
                   a[i] = a[i] - 2;
