@@ -41,7 +41,7 @@ Longest Increasing Subsequence
               {
                   // Find a index which just nums[index] >= i
                   // and index should as small as possible
-                  l = 0; r = sub.size() - 1;
+                  l = 0; r = sub.size();
                   while(l < r)
                   {
                       m = l + ((r - l) >> 1);
