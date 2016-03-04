@@ -3,13 +3,12 @@ Nim Game
 
 ## C++
 
-  - Answer
 
-  ```cpp
-  class Solution {
-  public:
-      bool canWinNim(int n) {
-          return n % 4;
-      }
-  };
-  ```
+```cpp
+class Solution {
+public:
+    bool canWinNim(int n) {
+        return n % 4;
+    }
+};
+```
