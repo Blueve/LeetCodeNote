@@ -20,7 +20,7 @@ Sort Colors
   };
   ```
 
-  Two pass
+  One pass
   ```cpp
   class Solution {
   public:
