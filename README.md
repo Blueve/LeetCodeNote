@@ -1,4 +1,6 @@
 LeetCodeNote
 ============
 
-Note my answer and solve method. I'll continuous improvement.
+Record my solutions, each of them has general methods and optimized methods. 
+
+I'll improve it continuously.
