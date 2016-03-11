@@ -41,7 +41,6 @@ public:
     void gameOfLife(vector<vector<int>>& board) {
         int v[8][2] = {{-1, -1}, {0, -1}, {-1, 0}, {0, 1}, {1, 0}, {1, 1}, {-1, 1}, {1, -1}};
         int m(board.size()), n(board[0].size());
-        auto pre = board;
         for(int i(0); i < m; ++i)
         {
             for(int j(0); j < n; ++j)
@@ -53,15 +52,16 @@ public:
                     int y = j + v[p][1];
                     if(x >= 0 && y >= 0 && x < m && y < n)
                     {
-                        if(pre[x][y]) count++;
+                        if(board[x][y] & 1) count++;
                     }
                 }
-                if(count < 2 || count > 3) board[i][j] = 0;
-                else if(count == 2) ;
-                else if(count == 3) board[i][j] = 1;
-                else board[i][j] = 0;
+                if(count == 2)      board[i][j] += board[i][j] << 1;
+                else if(count == 3) board[i][j] += 2;
+                
             }
         }
+        for(auto& line : board)
+            for(auto& i : line) i >>= 1;
     }
 };
 ```
