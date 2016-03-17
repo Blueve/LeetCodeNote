@@ -41,3 +41,19 @@ public:
     }
 };
 ```
+Static DP, faster when this method is invoked frequently.
+```cpp
+class Solution {
+public:
+    int numSquares(int n) {
+        static vector<int> DP {0};
+        while (DP.size() <= n) {
+            int m = DP.size(), squares = INT_MAX;
+            for (int i(1); i * i <= m; ++i)
+                squares = min(squares, DP[m - i * i] + 1);
+            DP.push_back(squares);
+        }
+        return DP[n];
+    }
+};
+```
