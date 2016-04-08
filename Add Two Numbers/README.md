@@ -15,43 +15,34 @@ Add Two Numbers
  */
 class Solution {
 public:
-    ListNode *addTwoNumbers(ListNode *l1, ListNode *l2) {
-        ListNode* result = new ListNode(0);
-        ListNode* item  = result;
-        ListNode* item1 = l1;
-        ListNode* item2 = l2;
-        
-        while(true)
+    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+        int a, b, s, c = 0;
+        ListNode h(0), *cur = &h;
+        while(l1 || l2)
         {
-            item->next = new ListNode(0);
-            if(item1 != NULL)
-                item->val += item1->val;
-            if(item2 != NULL)
-                item->val += item2->val;
-            
-            if(item->val >= 10)
+            a = b = 0;
+            if(l1)
             {
-                item->val -= 10;
-                item->next->val++;
+                a = l1->val;
+                l1 = l1->next;
             }
-            
-            if(item1 != NULL)
-                item1 = item1->next;
-            if(item2 != NULL)
-                item2 = item2->next;
-                
-            if(item1 == NULL && item2 == NULL)
+            if(l2)
             {
-                break;
+                b = l2->val;
+                l2 = l2->next;
             }
-            item = item->next;
+            s = a + b + c;
+            if(s >= 10)
+            {
+                s -= 10;
+                c = 1;
+            }
+            else c = 0;
+            cur->next = new ListNode(s);
+            cur = cur->next;
         }
-        if(item->next->val == 0)
-        {
-            item->next = NULL;
-        }
-        
-        return result;
+        if(c) cur->next = new ListNode(1);
+        return h.next;
     }
 };
 ```
