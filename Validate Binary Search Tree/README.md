@@ -52,3 +52,33 @@ public:
     }
 };
 ```
+
+```cpp
+class Solution {
+public:
+    bool isValidBST(TreeNode* root) {
+        if(!root) return true;
+        
+        stack<TreeNode*> dfs;
+        TreeNode *node = root, *pre = NULL;
+        while(!dfs.empty() || node)
+        {
+            if(node)
+            {
+                dfs.push(node);
+                node = node->left;
+            }
+            else
+            {
+                node = dfs.top();
+                dfs.pop();
+                if(pre && pre->val >= node->val)
+                    return false;
+                pre = node;
+                node = node->right;
+            }
+        }
+        return true;
+    }
+};
+```
