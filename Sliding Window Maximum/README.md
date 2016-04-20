@@ -1,4 +1,4 @@
-Single Number
+Sliding Window Maximum
 ==========
 
 ## C++
@@ -7,11 +7,18 @@ Single Number
 ```cpp
 class Solution {
 public:
-    int singleNumber(vector<int>& nums) {
-        int result = nums[0];
-        for(int i(1); i < nums.size(); ++i)
+    vector<int> maxSlidingWindow(vector<int>& nums, int k) {
+        deque<int> q;
+        vector<int> result;
+        for(int i(0); i < nums.size(); ++i)
         {
-            result ^= nums[i];
+            if(!q.empty() && q.front() == i - k)
+                q.pop_front();
+            while(!q.empty() && nums[q.back()] < nums[i])
+                q.pop_back();
+            q.push_back(i);
+            if(i >= k - 1)
+                result.push_back(nums[q.front()]);
         }
         return result;
     }
