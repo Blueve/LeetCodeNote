@@ -93,3 +93,85 @@ public:
     }
 };
 ```
+
+A*, but time cost is highest, I have not figure out that : (
+```cpp
+struct state
+{
+    string str;
+    int h; // Different between str and endWord
+    int g; // Current length
+    int f; // f = h + g
+
+    state(string& s, int h, int g)
+        : str(s), h(h), g(g)
+    {
+        f = h + g;
+    }
+};
+
+struct cmp
+{
+    bool operator() (const state& a, const state& b)
+    {
+        return a.f > b.f;
+    }
+};
+
+class Solution {
+public:
+    int ladderLength(string beginWord, string endWord, unordered_set<string>& wordList) {
+        // Compute all word's 'h'
+        map<string, int> h;
+        for(auto& word : wordList)
+        {
+            int diff = 0;
+            for(int i(0); i < endWord.length(); ++i)
+            {
+                if(word[i] != endWord[i])
+                    ++diff;
+            }
+            h[word] = diff;
+        }
+
+        // A*
+        priority_queue<state, vector<state>, cmp> open;
+        unordered_set<string> openset;
+
+        open.push(state(beginWord, 0, 1));
+        openset.insert(beginWord);
+        while(!open.empty())
+        {
+            auto s = open.top();
+            open.pop();
+            openset.erase(s.str);
+            wordList.erase(s.str);
+
+            if(s.str == endWord)
+                return s.g;
+
+            // Try expend current state
+            auto& word = s.str;
+            for(int i(0); i < word.length(); ++i)
+            {
+                char ch = word[i];
+                for(char j('a'); j <= 'z'; ++j)
+                {
+                    word[i] = j;
+                    // Because we inc 'g' only one in every step,
+                    // if the word is already in openset,
+                    // then the word's 'g' must equal or bigger than 'g' in openlist
+                    // and that means we needn't fix 'g' in openlist
+                    if(!wordList.count(word) || openset.count(word))
+                        continue;
+
+                    open.push(state(word, h[word], s.g + 1));
+                    openset.insert(word);
+                }
+                word[i] = ch;
+            }
+        }
+        return 0;
+    }
+};
+```
