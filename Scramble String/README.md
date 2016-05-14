@@ -41,7 +41,7 @@ public:
 ```
 
 Purning + DP, 
-slower than purning only in LeetCode, but faster in below test case:
+slower than purning only in LeetCode, but faster with below test case:
 
 > "bcdebcdebcdebcdebcdebcdebcdebcdebcdebcdebcdebcdebcdebcdebcdebcdebcdebcdebcdebcdebcdebcde"
 > "cebdcebdcebdcebdcebdcebdcebdcebdcebdcebdcebdcebdcebdcebdcebdcebdcebdcebdcebdcebdcebdcebd"
