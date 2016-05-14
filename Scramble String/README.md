@@ -40,9 +40,12 @@ public:
 };
 ```
 
-Purning + DP, Slower than purning only in LeetCode, but faster in below test case:
+Purning + DP, 
+slower than purning only in LeetCode, but faster in below test case:
+
 > "bcdebcdebcdebcdebcdebcdebcdebcdebcdebcdebcdebcdebcdebcdebcdebcdebcdebcdebcdebcdebcdebcde"
 > "cebdcebdcebdcebdcebdcebdcebdcebdcebdcebdcebdcebdcebdcebdcebdcebdcebdcebdcebdcebdcebdcebd"
+
 ```cpp
 class Solution {
     unordered_map<string, bool> DP;
