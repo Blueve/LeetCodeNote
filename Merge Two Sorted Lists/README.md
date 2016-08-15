@@ -16,11 +16,8 @@ Merge Two Sorted Lists
 class Solution {
 public:
     ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
-        if(!l1) return l2;
-        if(!l2) return l1;
-        
-        ListNode *head = new ListNode(0);
-        ListNode *p = head, *result;
+        ListNode head(0);
+        ListNode *p = &head;
         while(l1 && l2)
         {
             if(l1->val < l2->val)
@@ -36,11 +33,8 @@ public:
             p = p->next;
         }
         if(l1) p->next = l1;
-        else   p->next = l2;
-        
-        result = head->next;
-        delete head;
-        return result;
+        if(l2) p->next = l2;
+        return head.next;
     }
 };
 ```
