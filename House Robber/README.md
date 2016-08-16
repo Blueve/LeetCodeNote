@@ -9,10 +9,10 @@ class Solution {
 public:
     int rob(vector<int>& nums) {
         int N(nums.size()), tmp, max(0);
-        
+
         if(!N) return 0;
-        
-        int *DP = new int[N] {0};
+
+        vector<int> DP(N);
         //f(p) = nums[p] + max{num[i], i < p - 1}
         for(int p(0); p < N; ++p)
         {
